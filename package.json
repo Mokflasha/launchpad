@@ -9,9 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "moment": "^2.30.1",
-    "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "dayjs": "^1.11.13",
+    "vue": "^3.4.21"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
