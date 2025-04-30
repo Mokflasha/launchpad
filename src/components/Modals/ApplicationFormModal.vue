@@ -64,10 +64,10 @@ const onSubmit = (e: Event) => {
       </h2>
 
       <form @submit="onSubmit" class="flex flex-col gap-4">
-        <Input v-model="lastName" id="lastName" label="Фамилия *" required @blur="validateField('lastName', lastName)"/>
+        <Input v-model="lastName" id="lastName" label="Фамилия" required @blur="validateField('lastName', lastName)"/>
         <p v-if="errors.lastName" class="text-red-500 text-sm">{{ errors.lastName }}</p>
 
-        <Input v-model="firstName" id="firstName" label="Имя *" required @blur="validateField('firstName', firstName)"/>
+        <Input v-model="firstName" id="firstName" label="Имя" required @blur="validateField('firstName', firstName)"/>
         <p v-if="errors.firstName" class="text-red-500 text-sm">{{ errors.firstName }}</p>
 
         <Input v-model="middleName" id="middleName" label="Отчество"/>
@@ -86,7 +86,7 @@ const onSubmit = (e: Event) => {
         </select>
         <p v-if="errors.weight" class="text-red-500 text-sm">{{ errors.weight }}</p>
 
-        <Input v-model="club" id="club" label="Клуб *" required @blur="validateField('club', club)"/>
+        <Input v-model="club" id="club" label="Клуб" required @blur="validateField('club', club)"/>
         <p v-if="errors.club" class="text-red-500 text-sm">{{ errors.club }}</p>
 
         <label class="text-sm font-normal">Округ *</label>
@@ -102,11 +102,11 @@ const onSubmit = (e: Event) => {
           <option v-for="c in cities" :key="c" :value="c">{{ c }}</option>
         </select>
 
-        <Input v-model="coachFullName" id="coachFullName" label="ФИО тренера *" required
+        <Input v-model="coachFullName" id="coachFullName" label="ФИО тренера" required
                @blur="validateField('coachFullName', coachFullName)"/>
         <p v-if="errors.coachFullName" class="text-red-500 text-sm">{{ errors.coachFullName }}</p>
 
-        <Input v-model="phone" id="phone" label="Номер телефона *" type="tel" required
+        <Input v-model="phone" id="phone" label="Номер телефона" type="tel" required
                @blur="validateField('phone', phone)"/>
         <p v-if="errors.phone" class="text-red-500 text-sm">{{ errors.phone }}</p>
 

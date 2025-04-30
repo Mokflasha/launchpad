@@ -16,7 +16,7 @@ const TOURNAMENT_DATE = "2025-05-24T00:00:00";
 const showFeeModal = ref(false);
 const showConditionsModal = ref(false);
 const showPrivacyAgreement = ref(false);
-const showPolicyAgreement = ref(false);
+const showPolicy = ref(false);
 
 const {
   days,
@@ -111,7 +111,7 @@ const toggleMobileMenu = () => {
       </div>
       <EntryConditionsModal v-model="showConditionsModal"/>
       <PrivacyAgreementModal v-model="showPrivacyAgreement"/>
-      <PolicyModal v-model="showPrivacyPolicy"/>
+      <PolicyModal v-model="showPolicy"/>
 
       <!-- Register & Timer -->
       <div class="flex flex-col-reverse sm:flex-col gap-4 w-full items-center">
@@ -169,7 +169,7 @@ const toggleMobileMenu = () => {
 
         <div class="flex flex-col gap-2 text-[.7rem] font-medium underline text-center sm:hidden">
           <a @click="showPrivacyAgreement =true">Согласие на обработку персональных данных</a>
-          <a @click="showPolicyAgreement = true">Политика конфиденциальности</a>
+          <a @click="showPolicy = true">Политика конфиденциальности</a>
         </div>
       </div>
     </div>

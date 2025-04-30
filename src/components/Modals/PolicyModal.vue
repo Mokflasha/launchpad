@@ -18,8 +18,6 @@ const close = () => {
 <template>
   <BaseModal :modelValue="props.modelValue" @update:modelValue="val => emit('update:modelValue', val)">
     <div class="relative w-full max-h-[80vh] overflow-y-auto px-1 text-sm text-zinc-700 leading-relaxed">
-      <!-- Кнопка закрытия -->
-      <button @click="close" class="absolute top-2 right-3 text-2xl text-zinc-500 hover:text-zinc-800">×</button>
 
       <h3 class="text-xl font-semibold text-center mb-6">Политика конфиденциальности</h3>
 
