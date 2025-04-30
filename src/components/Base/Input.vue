@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import {computed, defineEmits, defineProps} from "vue";
 
-type InputType = "text" | "email" | "tel" | "password" | "number";
-
 const props = defineProps<{
   modelValue: string;
   label?: string;
   placeholder?: string;
-  type?: InputType;
+  type?: string;
   id: string;
   disabled?: boolean;
   required?: boolean;
