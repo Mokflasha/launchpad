@@ -19,6 +19,19 @@ body {
     @apply overflow-x-hidden min-h-screen sm:overflow-y-hidden sh:overflow-y-auto
 }
 
+.scrollbar-hide {
+    /* Chrome, Safari, Opera */
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Firefox */
+    scrollbar-width: none;
+    -ms-overflow-style: none; /* IE/Edge */
+}
+
+
 .text-stroke {
     -webkit-text-stroke: 4px #5029de;
     paint-order: stroke fill;

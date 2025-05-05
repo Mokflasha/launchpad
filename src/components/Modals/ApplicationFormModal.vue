@@ -4,15 +4,17 @@ import BaseModal from "@/components/Modals/BaseModal.vue";
 import Input from "@/components/Base/Input.vue";
 import {useFormValidation} from "@/composables/useFormValidation";
 import {citiesByDistrict, districts} from "@/constants/districts";
+import PolicyModal from "@/components/Modals/PolicyModal.vue";
 
 const props = defineProps<{
   modelValue: boolean;
-  openPrivacyPolicy: () => void;
 }>();
 
 const emit = defineEmits<{
   (e: "update:modelValue", value: boolean): void;
 }>();
+
+const showPolicy = ref(false);
 
 const lastName = ref("");
 const firstName = ref("");
@@ -48,7 +50,6 @@ const onSubmit = (e: Event) => {
 
   if (valid) {
     console.log("✅ Форма валидна");
-    // здесь можно отправить данные
   }
 };
 </script>
@@ -58,7 +59,7 @@ const onSubmit = (e: Event) => {
       :modelValue="props.modelValue"
       @update:modelValue="val => emit('update:modelValue', val)"
   >
-    <div class="w-full max-h-[80vh] overflow-y-auto">
+    <div class="w-full">
       <h2 class="text-md font-medium my-4 text-center">
         Отправь заявку на чемпионат
       </h2>
@@ -73,14 +74,16 @@ const onSubmit = (e: Event) => {
         <Input v-model="middleName" id="middleName" label="Отчество"/>
 
         <label class="text-sm font-normal">Год рождения *</label>
-        <select v-model="birthYear" class="border p-2 rounded-md text-zinc-900">
+        <select v-model="birthYear"
+                class="border p-2 rounded-3xl h-10 font-normal text-sm focus:outline-[#5029de] bg-white">
           <option disabled value="">Выберите год</option>
           <option v-for="year in birthYears" :key="year" :value="year">{{ year }}</option>
         </select>
         <p v-if="errors.birthYear" class="text-red-500 text-sm">{{ errors.birthYear }}</p>
 
         <label class="text-sm font-normal">Вес, кг *</label>
-        <select v-model="weight" class="border p-2 rounded-md text-zinc-900">
+        <select v-model="weight"
+                class="border p-2 rounded-3xl h-10 font-normal text-sm focus:outline-[#5029de] bg-white">
           <option disabled value="">Выберите вес</option>
           <option v-for="w in weights" :key="w" :value="w">{{ w }}</option>
         </select>
@@ -90,14 +93,16 @@ const onSubmit = (e: Event) => {
         <p v-if="errors.club" class="text-red-500 text-sm">{{ errors.club }}</p>
 
         <label class="text-sm font-normal">Округ *</label>
-        <select v-model="district" class="border p-2 rounded-md text-zinc-900">
+        <select v-model="district"
+                class="border p-2 rounded-3xl h-10 font-normal text-sm focus:outline-[#5029de] bg-white">
           <option disabled value="">Выберите округ</option>
           <option v-for="d in districts" :key="d" :value="d">{{ d }}</option>
         </select>
         <p v-if="errors.district" class="text-red-500 text-sm">{{ errors.district }}</p>
 
         <label v-if="cities.length" class="text-sm font-normal">Город *</label>
-        <select v-if="cities.length" v-model="city" class="border p-2 rounded-md text-zinc-900">
+        <select v-if="cities.length" v-model="city"
+                class="border p-2 rounded-3xl h-10 font-normal text-sm focus:outline-[#5029de] bg-white">
           <option disabled value="">Выберите город</option>
           <option v-for="c in cities" :key="c" :value="c">{{ c }}</option>
         </select>
@@ -113,10 +118,11 @@ const onSubmit = (e: Event) => {
         <button type="submit" class="bg-[#5029de] text-white py-2 rounded-md hover:bg-[#4124ab] transition shadow">
           Отправить
         </button>
+        <PolicyModal v-model="showPolicy"/>
 
         <p class="text-[.65em] text-center text-zinc-600 mt-1">
           Нажимая кнопку, вы даёте согласие на
-          <a @click="props.openPrivacyPolicy" class="underline cursor-pointer">обработку персональных данных</a>
+          <a @click="showPolicy = true" class="underline cursor-pointer">обработку персональных данных</a>
         </p>
       </form>
     </div>

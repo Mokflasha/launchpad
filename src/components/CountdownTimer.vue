@@ -21,7 +21,7 @@ const props = defineProps<{
       <template v-for="(time, index) in props.times" :key="index">
         <div class="flex flex-col text-center">
           <p class="text-[clamp(2rem,8vw,4rem)]">{{ time.value }}</p>
-          <p class="text-[clamp(1rem,2vw,1.5rem)] font-normal">{{ time.label }}</p>
+          <p class="text-[clamp(1rem,2vw,1.5rem)] font-thin">{{ time.label }}</p>
         </div>
         <p v-if="index < props.times.length - 1" class="text-[clamp(2rem,8vw,6rem)]">:</p>
       </template>

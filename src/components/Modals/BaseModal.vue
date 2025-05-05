@@ -9,52 +9,41 @@ const emit = defineEmits<{
   (e: "update:modelValue", value: boolean): void;
 }>();
 
-const close = () => {
-  emit("update:modelValue", false);
-};
+const close = () => emit("update:modelValue", false);
+const onBackdropClick = () => close();
 
-const onBackdropClick = () => {
-  close();
-};
-
-// Scroll Lock Logic
+// Scroll Lock
 const lockScroll = () => {
   document.body.style.overflow = "hidden";
 };
-
 const unlockScroll = () => {
   document.body.style.overflow = "";
 };
 
-watch(
-    () => props.modelValue,
-    (newVal) => {
-      if (newVal) {
-        lockScroll();
-      } else {
-        unlockScroll();
-      }
-    }
-);
-
+watch(() => props.modelValue, (val) => {
+  val ? lockScroll() : unlockScroll();
+});
 onMounted(() => {
   if (props.modelValue) lockScroll();
 });
-
-onBeforeUnmount(() => {
-  unlockScroll(); // на всякий случай
-});
+onBeforeUnmount(() => unlockScroll());
 </script>
 
 <template>
-  <transition name="slide-down">
-    <div
-        v-if="modelValue"
-        class="fixed inset-0 z-[100] flex items-center justify-center px-4"
-    >
-      <div class="fixed inset-0 bg-black/60" @click="onBackdropClick"></div>
-
+  <div v-if="modelValue" class="fixed inset-0 z-[100] flex items-center justify-center px-4">
+    <!-- Фон с fade-появлением -->
+    <transition name="fade-backdrop">
       <div
+          v-show="modelValue"
+          class="fixed inset-0 bg-black/60"
+          @click="onBackdropClick"
+      ></div>
+    </transition>
+
+    <!-- Модалка с плавным появлением сверху -->
+    <transition name="slide-down" appear>
+      <div
+          v-if="modelValue"
           class="relative bg-white rounded-xl shadow-xl max-w-lg w-full max-h-[90vh] z-50 overflow-hidden"
       >
         <button
@@ -64,32 +53,44 @@ onBeforeUnmount(() => {
           ×
         </button>
 
-        <!-- Добавлено: обёртка со скроллом -->
-        <div class="overflow-y-auto max-h-[80vh] p-8">
+        <div class="overflow-y-auto max-h-[80vh] p-8 scrollbar-hide">
+
           <slot/>
         </div>
       </div>
-    </div>
-  </transition>
+    </transition>
+  </div>
 </template>
 
 <style scoped>
-.slide-down-enter-active,
-.slide-down-leave-active {
+/* Анимация заднего фона */
+.fade-backdrop-enter-active,
+.fade-backdrop-leave-active {
+  transition: opacity 0.25s ease;
+}
+
+.fade-backdrop-enter-from,
+.fade-backdrop-leave-to {
+  opacity: 0;
+}
+
+.fade-backdrop-enter-to,
+.fade-backdrop-leave-from {
+  opacity: 1;
+}
+
+/* Анимация модального окна */
+.slide-down-enter-active {
   transition: all 0.4s ease;
 }
 
-.slide-down-enter-from,
-.slide-down-leave-to {
+.slide-down-enter-from {
+  transform: translateY(-40px);
   opacity: 0;
-  transform: translateY(-30px);
 }
 
-.slide-down-enter-to,
-.slide-down-leave-from {
-  opacity: 1;
+.slide-down-enter-to {
   transform: translateY(0);
+  opacity: 1;
 }
-
 </style>
-

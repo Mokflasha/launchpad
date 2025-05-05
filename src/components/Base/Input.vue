@@ -21,7 +21,7 @@ const inputValue = computed({
 });
 
 const computedClasses = computed(() => {
-  const base = "border p-2 rounded-md h-10 text-zinc-900 focus:outline-[#5029de]";
+  const base = "border p-2 rounded-3xl h-10 font-normal focus:outline-[#5029de]";
   return props.disabled ? `${base} opacity-50 cursor-not-allowed` : base;
 });
 </script>
