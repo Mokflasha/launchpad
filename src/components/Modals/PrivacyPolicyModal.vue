@@ -20,7 +20,7 @@ const emit = defineEmits<{
       <h3 class="text-xl font-semibold text-center mb-6">
         Политика конфиденциальности
       </h3>
-      <div class="text-sm font-light text-zinc-600 flex flex-col gap-4">
+      <div class="text-sm max-h-[80vh]  font-light text-zinc-600 flex flex-col gap-4">
         <p>
           Ваши персональные данные будут использоваться исключительно для целей обработки вашей заявки. Мы уважаем вашу
           конфиденциальность и не передаем информацию третьим лицам.

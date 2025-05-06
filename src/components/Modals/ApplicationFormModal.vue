@@ -85,7 +85,7 @@ const onSubmit = async (e: Event) => {
       :modelValue="props.modelValue"
       @update:modelValue="val => emit('update:modelValue', val)"
   >
-    <div class="w-full p-5 max-h-[80vh] overflow-y-auto scrollbar-hide">
+    <div class="w-full p-5 max-h-[80vh]  overflow-y-auto scrollbar-hide">
       <h2 class="text-md font-medium my-4 text-center">Отправь заявку на чемпионат</h2>
 
       <template v-if="!isSubmitted">

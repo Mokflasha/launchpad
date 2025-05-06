@@ -53,7 +53,7 @@ onBeforeUnmount(() => unlockScroll());
           ×
         </button>
 
-        <div class="overflow-y-auto p-8 scrollbar-hide">
+        <div class="overflow-y-auto  p-8 scrollbar-hide">
 
           <slot/>
         </div>
