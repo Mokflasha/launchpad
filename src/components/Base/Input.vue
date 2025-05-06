@@ -27,7 +27,7 @@ const computedClasses = computed(() => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-1">
+  <div class="flex flex-col">
     <label v-if="props.label" :for="id" class="text-sm font-normal">
       {{ props.label }} <span v-if="required">*</span>
     </label>

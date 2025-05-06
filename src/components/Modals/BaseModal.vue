@@ -30,7 +30,7 @@ onBeforeUnmount(() => unlockScroll());
 </script>
 
 <template>
-  <div v-if="modelValue" class="fixed inset-0 z-[100] flex items-center justify-center px-4">
+  <div v-if="modelValue" class="fixed inset-0 z-[100] flex items-center justify-center px-2">
     <!-- Фон с fade-появлением -->
     <transition name="fade-backdrop">
       <div
@@ -53,7 +53,7 @@ onBeforeUnmount(() => unlockScroll());
           ×
         </button>
 
-        <div class="overflow-y-auto max-h-[80vh] p-8 scrollbar-hide">
+        <div class="overflow-y-auto p-8 scrollbar-hide">
 
           <slot/>
         </div>

@@ -49,14 +49,8 @@ const beforeEnter = (el: Element) => {
 const enter = (el: Element, done: () => void) => {
   const height = (el as HTMLElement).scrollHeight;
   el.animate(
-      [
-        {height: '0', opacity: 0},
-        {height: `${height}px`, opacity: 1}
-      ],
-      {
-        duration: 500,
-        easing: 'ease'
-      }
+      [{height: '0', opacity: 0}, {height: `${height}px`, opacity: 1}],
+      {duration: 400, easing: 'ease-out'}
   ).onfinish = () => {
     el.style.height = '';
     el.style.opacity = '';
@@ -67,18 +61,11 @@ const enter = (el: Element, done: () => void) => {
 const leave = (el: Element, done: () => void) => {
   const height = (el as HTMLElement).scrollHeight;
   el.animate(
-      [
-        {height: `${height}px`, opacity: 1},
-        {height: '0', opacity: 0}
-      ],
-      {
-        duration: 500,
-        easing: 'ease'
-      }
-  ).onfinish = () => {
-    done();
-  };
+      [{height: `${height}px`, opacity: 1}, {height: '0', opacity: 0}],
+      {duration: 400, easing: 'ease-in'}
+  ).onfinish = done;
 };
+
 
 </script>
 
@@ -87,39 +74,45 @@ const leave = (el: Element, done: () => void) => {
     <div class="flex justify-between sm:justify-center p-5 items-center">
       <div class="flex sm:flex-col items-center justify-center">
         <img src="./assets/images/logo.png" alt="logo" class="w-[75px]"/>
-        <p class="text-white font-extrabold ml-2 mt-2 w-[200px] sm:w-full">Alliance Cup Championship</p>
+        <p class="text-white font-extrabold ml-2 mt-2 w-[180px] sm:w-full">Alliance Cup Championship</p>
       </div>
-      <button @click="toggleMobileMenu" class="sm:hidden w-8 h-8 relative" aria-label="Toggle menu">
+      <div @click="toggleMobileMenu" class="sm:hidden w-8 h-8 relative" aria-label="Toggle menu">
         <!-- Верхняя линия -->
         <span
-            class="block absolute left-0 h-[4px] w-8 bg-white transition-transform duration-300 ease-in-out"
-            :class="isMobileMenuOpen ? 'top-1/2 rotate-45' : 'top-1.5 rotate-0'"
+            class="block absolute left-0 h-[4px] w-8 bg-white transition-all duration-500 ease-in-out"
+            :class="isMobileMenuOpen
+      ? 'top-1/2 translate-y-[-50%] rotate-45'
+      : 'top-[6px] rotate-0 translate-y-0'"
         />
         <!-- Средняя линия -->
         <span
-            class="block absolute left-0 h-[4px] w-8 bg-white transition-opacity duration-200 ease-in-out"
-            :class="isMobileMenuOpen ? 'opacity-0' : 'top-3.5 opacity-100'"
+            class="block absolute left-0 h-[4px] w-8 bg-white transition-all duration-500 ease-in-out origin-left"
+            :class="isMobileMenuOpen
+      ? 'top-1/2 translate-y-[-50%] opacity-0 scale-x-0'
+      : 'top-[14px] opacity-100 scale-x-100'"
         />
         <!-- Нижняя линия -->
         <span
-            class="block absolute left-0 h-[4px] w-8 bg-white transition-transform duration-300 ease-in-out"
-            :class="isMobileMenuOpen ? 'top-1/2 -rotate-45' : 'bottom-1.5 rotate-0'"
+            class="block absolute left-0 h-[4px] w-8 bg-white transition-all duration-500 ease-in-out"
+            :class="isMobileMenuOpen
+      ? 'top-1/2 translate-y-[-50%] -rotate-45'
+      : 'top-[22px] rotate-0 translate-y-0'"
         />
-      </button>
-
+      </div>
     </div>
     <div
         class="absolute inset-0 -z-10 bg-[url(./assets/images/background.jpg)] bg-no-repeat bg-cover bg-[center_66%]"></div>
     <div class="fixed inset-0 -z-10 bg-black/50 min-h-screen h-full"></div>
     <ApplicationFormModal v-model="showForm" :openPrivacyPolicy="openPrivacyPolicy"/>
     <PrivacyPolicyModal v-model="showPrivacyPolicy"/>
+
     <transition @before-enter="beforeEnter"
                 @enter="enter"
                 @leave="leave"
     >
       <div
           v-show="isMobileMenuOpen"
-          class="sm:hidden text-white text-center px-[5vw] pt-4 flex flex-col items-center gap-4 overflow-hidden"
+          class="sm:hidden text-white text-center px-[5vw] pt-4 flex flex-col items-center gap-4 bg-black/30 rounded-b-xl overflow-hidden"
       >
         <p class="text-base font-medium">
           Соревнования по единоборствам: грепплинг, панкратион, вольная, греко-римская борьба.
@@ -158,11 +151,19 @@ const leave = (el: Element, done: () => void) => {
         </div>
 
         <div class="text-center font-medium text-[clamp(1rem,2vw,1.5rem)]">
-          <h2 class="text-[27px] my-4">Махачкала, Дворец спорта "Автодор" <br> 24–25 Мая, 2025</h2>
-          <Button @click="openForm" variant="primary"
-                  class="sm:hidden text-[clamp(.9rem,1.5vw,1.25rem)] uppercase w-fit">
-            зарегистрироваться
+          <h2 class="text-[27px] font-medium mt-[50px]">Махачкала, Дворец спорта "Автодор"</h2>
+          <h2 class="text-[27px] font-medium mb-4">24–25 Мая, 2025</h2>
+          <Button
+              @click="openForm"
+              variant="primary"
+              class="sm:hidden text-[clamp(.9rem,1.5vw,1.25rem)] uppercase w-fit mb-2
+         bg-gradient-to-r from-[#5029de] to-[#4124ab] text-white
+         shadow-[0_0_10px_#5029de] hover:shadow-[0_0_20px_#5029de]
+         transition duration-300 ease-in-out
+         active:scale-[0.97] active:brightness-90 rounded-3xl"
+          >Зарегистрироваться
           </Button>
+
         </div>
       </div>
       <EntryConditionsModal v-model="showConditionsModal"/>
@@ -171,44 +172,54 @@ const leave = (el: Element, done: () => void) => {
       <div class="flex flex-col-reverse sm:flex-col gap-4 w-full items-center">
         <nav
             class="flex flex-col sm:grid gap-2 py-4 uppercase text-center text-[clamp(0.9rem,1.2vw,1.1rem)]  grid-cols-2">
-          <h3 class="sm:hidden font-normal text-base">О турнире:</h3>
 
-          <a @click="showFeeModal = true"
-             class="border border-[#5029de] bg-black/50 rounded-3xl px-4 py-5 font-normal text-sm
-          transition duration-150 ease-in-out
-          hover:bg-[#5029de]/70 hover:text-white
-          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]
-          active:bg-[#5029de]/60">
+          <a
+              @click="showFeeModal = true"
+              class="cursor-pointer select-none touch-manipulation
+         bg-black/30 rounded-3xl px-6 py-5 font-normal text-sm
+         ring-1 ring-[#5029de]/50 shadow-[0_0_6px_#5029de]
+         transition-all duration-150 ease-out
+         hover:bg-[#5029de]/80 hover:text-white hover:shadow-[0_0_14px_#5029de]
+         active:bg-[#5029de]/70 active:scale-90 active:shadow-[0_0_18px_#5029de]
+         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]"
+          >
             Оплата взноса и страховка
           </a>
 
+
           <a @click="showConditionsModal = true"
-             class="border border-[#5029de] bg-black/50 rounded-3xl px-4 py-5 font-normal text-sm
-          transition duration-150 ease-in-out
-          hover:bg-[#5029de]/70 hover:text-white
-          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]
-          active:bg-[#5029de]/60">
+             class="cursor-pointer select-none touch-manipulation
+         bg-black/30 rounded-3xl px-6 py-5 font-normal text-sm
+         ring-1 ring-[#5029de]/50 shadow-[0_0_6px_#5029de]
+         transition-all duration-150 ease-out
+         hover:bg-[#5029de]/80 hover:text-white hover:shadow-[0_0_14px_#5029de]
+         active:bg-[#5029de]/70 active:scale-90 active:shadow-[0_0_18px_#5029de]
+         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]">
             Условия допуска
           </a>
 
-          <a download
-             class="border border-[#5029de] bg-black/50 rounded-3xl px-4 py-5 font-normal text-sm
-          transition duration-150 ease-in-out
-          hover:bg-[#5029de]/70 hover:text-white
-          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]
-          active:bg-[#5029de]/60"
-             href="#">
+          <a download href="#"
+             class="cursor-pointer select-none touch-manipulation
+         bg-black/30 rounded-3xl px-6 py-5 font-normal text-sm
+         ring-1 ring-[#5029de]/50 shadow-[0_0_6px_#5029de]
+         transition-all duration-150 ease-out
+         hover:bg-[#5029de]/80 hover:text-white hover:shadow-[0_0_14px_#5029de]
+         active:bg-[#5029de]/70 active:scale-90 active:shadow-[0_0_18px_#5029de]
+         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]">
             Скачать регламент
           </a>
 
           <a href="#"
-             class="border border-[#5029de] bg-black/50 rounded-3xl px-4 py-5 font-normal text-sm
-          transition duration-150 ease-in-out
-          hover:bg-[#5029de]/70 hover:text-white
-          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]
-          active:bg-[#5029de]/60">
+             class="cursor-pointer select-none touch-manipulation
+         bg-black/30 rounded-3xl px-6 py-5 font-normal text-sm
+         ring-1 ring-[#5029de]/50 shadow-[0_0_6px_#5029de]
+         transition-all duration-150 ease-out
+         hover:bg-[#5029de]/80 hover:text-white hover:shadow-[0_0_14px_#5029de]
+         active:bg-[#5029de]/70 active:scale-90 active:shadow-[0_0_18px_#5029de]
+         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]">
             Список участников
           </a>
+
 
         </nav>
         <Button @click="openForm" variant="primary"
@@ -232,9 +243,10 @@ const leave = (el: Element, done: () => void) => {
         <div class="flex flex-col gap-2 items-center">
           <p class="sm:hidden font-semibold">Наши спонсоры:</p>
           <div class="flex flex-row gap-8 items-center">
-            <a href="#"><img class="h-[clamp(4rem,10vw,4rem)]" src="./assets/images/mircato.png" alt="mircato"/></a>
+            <a href="#"><img class="h-[clamp(5rem,10vw,4rem)] w-[90px]" src="./assets/images/mircato.png"
+                             alt="mircato"/></a>
             <a href="#"><img class="h-[clamp(6rem,15vw,8rem)]" src="./assets/images/dihard.png" alt="dihard"/></a>
-            <a href="#"><img class="h-[clamp(4rem,10vw,4rem)]" src="./assets/images/architeck.png" alt="architeck"/></a>
+            <a href="#"><img class="h-[clamp(5rem,10vw,4rem)]" src="./assets/images/architeck.png" alt="architeck"/></a>
           </div>
         </div>
 
