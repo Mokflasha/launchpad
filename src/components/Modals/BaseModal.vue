@@ -45,20 +45,19 @@ onBeforeUnmount(() => unlockScroll())
       <transition name="slide-down" appear>
         <div
           v-show="modelValue"
-          class="relative bg-white rounded-xl shadow-xl max-w-lg w-full max-h-[99vh] z-50 flex flex-col pointer-events-auto"
+          class=" bg-white rounded-xl shadow-xl max-w-lg w-full max-h-[99vh] max-sm:max-h-[80vh]  z-50 flex flex-col pointer-events-auto"
         >
-				<div class="border-b flex justify-end">
-					<button
-					@click="close"
-					class=" p-3 text-2xl text-[#bfbfbf] cursor-pointer"
-					>
-						×
-					</button>
-				</div>
 
-
-          <div class="overflow-y-auto p-8 pt-[2rem] max-h-[99vh] scrollbar-hide">
-            <slot />
+          <div class="overflow-y-auto max-h-[99vh] max-sm:max-h-[80vh] scrollbar-hide">
+						<div class="border-b flex justify-end ">
+							<button
+							@click="close"
+							class=" p-3 text-2xl text-[#bfbfbf] cursor-pointer"
+							>
+								×
+							</button>
+						</div>
+						<slot />
           </div>
         </div>
       </transition>

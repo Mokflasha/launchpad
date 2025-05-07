@@ -8,6 +8,8 @@ import PolicyModal from "@/components/Modals/PolicyModal.vue";
 import arrowDown from '@/assets/images/arrow-down.svg';
 
 
+
+
 const props = defineProps<{ modelValue: boolean }>();
 const emit = defineEmits<{ (e: "update:modelValue", value: boolean): void }>();
 
@@ -92,7 +94,7 @@ const onSubmit = async (e: Event) => {
       <h2 class="text-md font-medium text-[20px] text-[#333333] TTNorms text-center pb-[20px]">Отправь заявку на чемпионат прямо сейчас!</h2>
 
       <template v-if="!isSubmitted">
-        <form @submit="onSubmit" class="flex flex-col text-[#333333] gap-5">
+        <form @submit="onSubmit" class="p-8 pt-[2rem] flex flex-col text-[#333333] gap-5">
           <Input v-model="lastName" id="lastName" class="gap-2" label="Твоя фамилия" inputClass="border-[#bfbfbf] focus:outline focus:outline-[#5029de]" required @blur="validateField('lastName', lastName)"/>
           <p v-if="errors.lastName" class="text-red-500 text-sm">{{ errors.lastName }}</p>
 

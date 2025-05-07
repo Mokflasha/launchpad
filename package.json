@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "dayjs": "^1.11.13",
-    "vue": "^3.4.21"
+    "vue": "^3.4.21",
+    "vue3-touch-events": "^5.0.13"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",

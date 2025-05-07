@@ -11,6 +11,8 @@ import EntryConditionsModal from "@/components/Modals/EntryConditionsModal.vue";
 import PrivacyAgreementModal from "@/components/Modals/PrivacyAgreementModal.vue";
 import PolicyModal from "@/components/Modals/PolicyModal.vue";
 
+const isTouched = ref(false)
+
 const TOURNAMENT_DATE = "2025-05-24T00:00:00";
 
 const showFeeModal = ref(false);
@@ -210,16 +212,20 @@ const leave = (el: Element, done: () => void) => {
 							>
 								Скачать регламент
 							</a>
-							<a
+							<a 
 								href="#"
-								class="ripple-btn cursor-pointer select-none touch-manipulation
-									bg-black/30 rounded-xl px-6 py-5 font-normal text-sm
-									ring-1 ring-[#5029de]/50 shadow-[0_0_6px_#5029de]
-									transition-all duration-150 ease-out
-									hover:bg-[#5029de]/80 hover:text-white hover:shadow-[0_0_14px_#5029de]
-									active:bg-[#5029de]/70 active:scale-90 active:shadow-[0_0_18px_#5029de]
-									focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]"
-							>
+								@touchstart="isTouched = true"
+								@touchend="isTouched = false"
+								@touchcancel="isTouched = false"
+								:class="[
+										'ripple-btn cursor-pointer select-none touch-manipulation',
+										'rounded-xl px-6 py-5 font-normal text-sm',
+										'ring-1 ring-[#5029de]/50 transition-all duration-150 ease-out',
+										'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]',
+										isTouched
+											? 'bg-[#5029de]/70 text-white scale-90 shadow-[0_0_18px_#5029de]'
+											: 'bg-black/30 hover:bg-[#5029de]/80 hover:text-white hover:shadow-[0_0_14px_#5029de]'
+									]"	>
 								Список участников
 							</a>
 						</div>
