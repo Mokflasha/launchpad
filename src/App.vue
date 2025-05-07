@@ -76,6 +76,7 @@ const leave = (el: Element, done: () => void) => {
         <img src="./assets/images/logo.png" alt="logo" class="w-[75px]"/>
         <p class="text-white font-extrabold ml-2 mt-2 w-[180px] sm:w-full">Alliance Cup Championship</p>
       </div>
+			
       <div @click="toggleMobileMenu" class="sm:hidden w-8 h-8 relative" aria-label="Toggle menu">
         <!-- Верхняя линия -->
         <span
@@ -131,7 +132,7 @@ const leave = (el: Element, done: () => void) => {
     </transition>
 
     <FeeModal v-model="showFeeModal"/>
-    <div class="text-white px-[5vw] sm:pt-7 max-sm:pt-8 flex flex-col items-center gap-4">
+    <div class="text-white px-[5vw] sm:pt-1 max-sm:pt-8 flex flex-col items-center gap-4">
 
       <div class="flex flex-col gap-2">
         <div
@@ -151,8 +152,8 @@ const leave = (el: Element, done: () => void) => {
         </div>
 
         <div class="text-center font-medium text-[clamp(1rem,2vw,1.5rem)]">
-          <h2 class="text-[27px] font-medium mt-[20px]">Махачкала, Дворец спорта "Автодор"</h2>
-          <h2 class="text-[27px] font-medium mb-3">24–25 Мая, 2025</h2>
+          <h2 class="text-[27px] sm:hidden font-medium mt-[20px]">Махачкала, Дворец спорта "Автодор"</h2>
+          <h2 class="text-[27px] sm:hidden font-medium">24–25 Мая, 2025</h2>
           <Button
               @click="openForm"
               variant="primary"
@@ -170,63 +171,61 @@ const leave = (el: Element, done: () => void) => {
       <PrivacyAgreementModal v-model="showPrivacyAgreement"/>
       <PolicyModal v-model="showPolicy"/>
       <div class="flex flex-col-reverse sm:flex-col gap-4 w-full items-center">
-        <nav
-            class="flex flex-col sm:grid gap-2 uppercase text-center text-[clamp(0.9rem,1.2vw,1.1rem)]  grid-cols-2">
-						<a
-      @click="showFeeModal = true"
-      class="ripple-btn cursor-pointer select-none touch-manipulation
-        bg-black/30 rounded-3xl px-6 py-5 font-normal text-sm
-        ring-1 ring-[#5029de]/50 shadow-[0_0_6px_#5029de]
-        transition-all duration-150 ease-out
-        hover:bg-[#5029de]/80 hover:text-white hover:shadow-[0_0_14px_#5029de]
-        active:bg-[#5029de]/70 active:scale-90 active:shadow-[0_0_18px_#5029de]
-        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]"
-    >
-      Оплата взноса и страховка
-    </a>
-
-    <a
-      @click="showConditionsModal = true"
-      class="ripple-btn cursor-pointer select-none touch-manipulation
-        bg-black/30 rounded-3xl px-6 py-5 font-normal text-sm
-        ring-1 ring-[#5029de]/50 shadow-[0_0_6px_#5029de]
-        transition-all duration-150 ease-out
-        hover:bg-[#5029de]/80 hover:text-white hover:shadow-[0_0_14px_#5029de]
-        active:bg-[#5029de]/70 active:scale-90 active:shadow-[0_0_18px_#5029de]
-        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]"
-    >
-      Условия допуска
-    </a>
-
-    <a
-      download
-      href="#"
-      class="ripple-btn cursor-pointer select-none touch-manipulation
-        bg-black/30 rounded-3xl px-6 py-5 font-normal text-sm
-        ring-1 ring-[#5029de]/50 shadow-[0_0_6px_#5029de]
-        transition-all duration-150 ease-out
-        hover:bg-[#5029de]/80 hover:text-white hover:shadow-[0_0_14px_#5029de]
-        active:bg-[#5029de]/70 active:scale-90 active:shadow-[0_0_18px_#5029de]
-        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]"
-    >
-      Скачать регламент
-    </a>
-
-    <a
-      href="#"
-      class="ripple-btn cursor-pointer select-none touch-manipulation
-        bg-black/30 rounded-3xl px-6 py-5 font-normal text-sm
-        ring-1 ring-[#5029de]/50 shadow-[0_0_6px_#5029de]
-        transition-all duration-150 ease-out
-        hover:bg-[#5029de]/80 hover:text-white hover:shadow-[0_0_14px_#5029de]
-        active:bg-[#5029de]/70 active:scale-90 active:shadow-[0_0_18px_#5029de]
-        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]"
-    >
-      Список участников
-    </a>
-
-
+        <nav>
+						<div class="sm:bg-black/80 sm:py-5 sm:px-[200px] rounded-lg flex flex-col sm:grid gap-3  uppercase text-center text-[clamp(0.9rem,1.2vw,1.1rem)]  grid-cols-2"> 
+							<a
+				@click="showFeeModal = true"
+				class="ripple-btn cursor-pointer select-none touch-manipulation
+					bg-black/30 rounded-xl px-6 py-5 font-normal text-sm
+					ring-1 ring-[#5029de]/50 shadow-[0_0_6px_#5029de]
+					transition-all duration-150 ease-out
+					hover:bg-[#5029de]/80 hover:text-white hover:shadow-[0_0_14px_#5029de]
+					active:bg-[#5029de]/70 active:scale-90 active:shadow-[0_0_18px_#5029de]
+					focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]"
+			>
+				Оплата взноса и страховка
+							</a>
+							<a
+								@click="showConditionsModal = true"
+								class="ripple-btn cursor-pointer select-none touch-manipulation
+									bg-black/30 rounded-xl px-6 py-5 font-normal text-sm
+									ring-1 ring-[#5029de]/50 shadow-[0_0_6px_#5029de]
+									transition-all duration-150 ease-out
+									hover:bg-[#5029de]/80 hover:text-white hover:shadow-[0_0_14px_#5029de]
+									active:bg-[#5029de]/70 active:scale-90 active:shadow-[0_0_18px_#5029de]
+									focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]"
+							>
+								Условия допуска
+							</a>
+							<a
+								download
+								href="#"
+								class="ripple-btn cursor-pointer select-none touch-manipulation
+									bg-black/30 rounded-xl px-6 py-5 font-normal text-sm
+									ring-1 ring-[#5029de]/50 shadow-[0_0_6px_#5029de]
+									transition-all duration-150 ease-out
+									hover:bg-[#5029de]/80 hover:text-white hover:shadow-[0_0_14px_#5029de]
+									active:bg-[#5029de]/70 active:scale-90 active:shadow-[0_0_18px_#5029de]
+									focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]"
+							>
+								Скачать регламент
+							</a>
+							<a
+								href="#"
+								class="ripple-btn cursor-pointer select-none touch-manipulation
+									bg-black/30 rounded-xl px-6 py-5 font-normal text-sm
+									ring-1 ring-[#5029de]/50 shadow-[0_0_6px_#5029de]
+									transition-all duration-150 ease-out
+									hover:bg-[#5029de]/80 hover:text-white hover:shadow-[0_0_14px_#5029de]
+									active:bg-[#5029de]/70 active:scale-90 active:shadow-[0_0_18px_#5029de]
+									focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]"
+							>
+								Список участников
+							</a>
+						</div>
         </nav>
+				<h2 class="text-[27px] max-sm:hidden font-medium leading-[15px]">Махачкала, Дворец спорта "Автодор"</h2>
+				<h2 class="text-[27px] max-sm:hidden font-medium leading-[22px]">24–25 Мая, 2025</h2>
         <Button @click="openForm" variant="primary"
                 class="max-sm:hidden ripple-btn text-[clamp(.9rem,1.5vw,1.25rem)] uppercase rounded-3xl w-fit">
           зарегистрироваться
