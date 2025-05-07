@@ -5,6 +5,8 @@ import Input from "@/components/Base/Input.vue";
 import {useFormValidation} from "@/composables/useFormValidation";
 import {citiesByDistrict, districts} from "@/constants/districts";
 import PolicyModal from "@/components/Modals/PolicyModal.vue";
+import arrowDown from '@/assets/images/arrow-down.svg';
+
 
 const props = defineProps<{ modelValue: boolean }>();
 const emit = defineEmits<{ (e: "update:modelValue", value: boolean): void }>();
@@ -78,6 +80,7 @@ const onSubmit = async (e: Event) => {
   isSubmitting.value = false;
   isSubmitted.value = true;
 };
+
 </script>
 
 <template>
@@ -85,63 +88,66 @@ const onSubmit = async (e: Event) => {
       :modelValue="props.modelValue"
       @update:modelValue="val => emit('update:modelValue', val)"
   >
-    <div class="w-full p-5 max-h-[80vh]  overflow-y-auto scrollbar-hide">
-      <h2 class="text-md font-medium my-4 text-center">Отправь заявку на чемпионат</h2>
+    <div class="w-full p-5 h-full sm:rounded-xl sm:max-w-lg sm:h-auto montserrat overflow-y-auto scrollbar-hide">
+      <h2 class="text-md font-medium text-[20px] text-[#333333] TTNorms text-center pb-[20px]">Отправь заявку на чемпионат прямо сейчас!</h2>
 
       <template v-if="!isSubmitted">
-        <form @submit="onSubmit" class="flex flex-col gap-4">
-          <Input v-model="lastName" id="lastName" label="Фамилия" required @blur="validateField('lastName', lastName)"/>
+        <form @submit="onSubmit" class="flex flex-col text-[#333333] gap-5">
+          <Input v-model="lastName" id="lastName" class="gap-2" label="Твоя фамилия" inputClass="border-[#bfbfbf] focus:outline focus:outline-[#5029de]" required @blur="validateField('lastName', lastName)"/>
           <p v-if="errors.lastName" class="text-red-500 text-sm">{{ errors.lastName }}</p>
 
-          <Input v-model="firstName" id="firstName" label="Имя" required @blur="validateField('firstName', firstName)"/>
+          <Input v-model="firstName" id="firstName" class="gap-2" label="Имя" inputClass="border-[#bfbfbf] focus:outline focus:outline-[#5029de]" required @blur="validateField('firstName', firstName)"/>
           <p v-if="errors.firstName" class="text-red-500 text-sm">{{ errors.firstName }}</p>
 
-          <Input v-model="middleName" id="middleName" label="Отчество"/>
+          <Input v-model="middleName" id="middleName" class="gap-2" label="Отчество" inputClass="border-[#bfbfbf] focus:outline focus:outline-[#5029de]"/>
 
-          <label class="text-sm font-normal">Год рождения *</label>
+          <label class="text-sm font-normal -mb-3">Год рождения *</label>
           <select v-model="birthYear"
-                  class="border p-2 rounded-3xl h-10 font-normal text-sm bg-white focus:outline-[#5029de]">
-            <option disabled value="">Выберите год</option>
+					:style="{ backgroundImage: `url(${arrowDown})` }"
+					class="border border-[#bfbfbf] p-2 rounded-3xl h-10 font-normal text-sm bg-white focus:outline focus:outline-[#5029de]  appearance-none bg-no-repeat bg-[right_.7rem_center] bg-[length:.7rem] pr-10">
+            <option disabled value=""></option>
             <option v-for="year in birthYears" :key="year" :value="year">{{ year }}</option>
           </select>
           <p v-if="errors.birthYear" class="text-red-500 text-sm">{{ errors.birthYear }}</p>
 
-          <label class="text-sm font-normal">Вес, кг *</label>
+          <label class="text-sm font-normal -mb-3">Вес, кг *</label>
           <select v-model="weight"
-                  class="border p-2 rounded-3xl h-10 font-normal text-sm bg-white focus:outline-[#5029de]">
-            <option disabled value="">Выберите вес</option>
+					:style="{ backgroundImage: `url(${arrowDown})` }"
+					class="border border-[#bfbfbf] p-2 rounded-3xl h-10 font-normal text-sm bg-white focus:outline focus:outline-[#5029de]  appearance-none bg-no-repeat bg-[right_.7rem_center] bg-[length:.7rem] pr-10">
+            <option disabled value=""></option>
             <option v-for="w in weights" :key="w" :value="w">{{ w }}</option>
           </select>
           <p v-if="errors.weight" class="text-red-500 text-sm">{{ errors.weight }}</p>
 
-          <Input v-model="club" id="club" label="Клуб" required @blur="validateField('club', club)"/>
+          <Input v-model="club" id="club" label="Клуб" class="gap-2" inputClass="border-[#bfbfbf] focus:outline focus:outline-[#5029de]" required @blur="validateField('club', club)"/>
           <p v-if="errors.club" class="text-red-500 text-sm">{{ errors.club }}</p>
 
-          <label class="text-sm font-normal">Округ *</label>
+          <label class="text-sm font-normal -mb-3">Округ *</label>
           <select v-model="district"
-                  class="border p-2 rounded-3xl h-10 font-normal text-sm bg-white focus:outline-[#5029de]">
-            <option disabled value="">Выберите округ</option>
+									:style="{ backgroundImage: `url(${arrowDown})` }"
+                  class="border border-[#bfbfbf] p-2 rounded-3xl h-10 font-normal text-sm bg-white focus:outline focus:outline-[#5029de]  appearance-none bg-no-repeat bg-[right_.7rem_center] bg-[length:.7rem] pr-10">
+            <option disabled value=""></option>
             <option v-for="d in districts" :key="d" :value="d">{{ d }}</option>
           </select>
           <p v-if="errors.district" class="text-red-500 text-sm">{{ errors.district }}</p>
 
-          <label v-if="cities.length" class="text-sm font-normal">Город *</label>
+          <label v-if="cities.length" class="text-sm font-normal -mb-3">Город *</label>
           <select v-if="cities.length" v-model="city"
-                  class="border p-2 rounded-3xl h-10 font-normal text-sm bg-white focus:outline-[#5029de]">
-            <option disabled value="">Выберите город</option>
+                  class="border border-[#bfbfbf] p-2 rounded-3xl h-10 font-normal text-sm bg-white focus:outline focus:outline-[#5029de]">
+            <option disabled value=""></option>
             <option v-for="c in cities" :key="c" :value="c">{{ c }}</option>
           </select>
 
-          <Input v-model="coachFullName" id="coachFullName" label="ФИО тренера" required
+          <Input v-model="coachFullName" id="coachFullName"  class="gap-2" label="ФИО тренера" inputClass="border-[#bfbfbf] focus:outline focus:outline-[#5029de]" required
                  @blur="validateField('coachFullName', coachFullName)"/>
           <p v-if="errors.coachFullName" class="text-red-500 text-sm">{{ errors.coachFullName }}</p>
 
-          <Input v-model="phone" id="phone" label="Номер телефона" type="tel" required
+          <Input v-model="phone" id="phone" label="Номер телефона" inputClass="border-[#bfbfbf] focus:outline focus:outline-[#5029de]" class="gap-2" type="tel" required
                  @blur="validateField('phone', phone)"/>
           <p v-if="errors.phone" class="text-red-500 text-sm">{{ errors.phone }}</p>
 
           <button type="submit"
-                  class="py-2 rounded-md bg-gradient-to-r from-[#5029de] to-[#4124ab] text-white
+                  class="py-3 mb-3 rounded-md bg-gradient-to-r from-[#5029de] to-[#4124ab] text-white
               shadow-[0_0_10px_#5029de] hover:shadow-[0_0_20px_#5029de]
               transition duration-300 ease-in-out
               active:scale-[0.97] active:brightness-90 flex items-center justify-center"
@@ -152,10 +158,10 @@ const onSubmit = async (e: Event) => {
                 <path class="opacity-75" fill="currentColor"
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
               </svg>
-              Отправка...
+              Регистрация...
             </template>
             <template v-else>
-              Отправить
+              Зарегестрироваться
             </template>
           </button>
         </form>
@@ -176,7 +182,7 @@ const onSubmit = async (e: Event) => {
       </template>
 
       <PolicyModal v-model="showPolicy"/>
-      <p class="text-[.65em] text-center text-zinc-600 mt-1">
+      <p class="text-[.75em] text-center text-black mt-1">
         Нажимая кнопку, вы даёте согласие на
         <a @click="showPolicy = true" class="underline cursor-pointer">обработку персональных данных</a>
       </p>

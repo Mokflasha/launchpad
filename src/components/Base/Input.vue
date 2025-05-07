@@ -9,7 +9,9 @@ const props = defineProps<{
   id: string;
   disabled?: boolean;
   required?: boolean;
+	inputClass?: string;
 }>();
+
 
 const emits = defineEmits<{
   (e: "update:modelValue", value: string): void;
@@ -21,9 +23,9 @@ const inputValue = computed({
 });
 
 const computedClasses = computed(() => {
-  const base = "border p-2 rounded-3xl h-10 font-normal focus:outline-[#5029de]";
-  return props.disabled ? `${base} opacity-50 cursor-not-allowed` : base;
-});
+	const base = "border p-2 rounded-3xl h-10 font-normal focus:outline-[#5029de]";
+  const conditional = props.disabled ? "opacity-50 cursor-not-allowed" : "";
+  return [base, conditional, props.inputClass].join(" ");});
 </script>
 
 <template>

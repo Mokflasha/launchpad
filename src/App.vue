@@ -131,11 +131,11 @@ const leave = (el: Element, done: () => void) => {
     </transition>
 
     <FeeModal v-model="showFeeModal"/>
-    <div class="text-white px-[5vw] sm:pt-14 max-sm:pt-8 flex flex-col items-center gap-4">
+    <div class="text-white px-[5vw] sm:pt-7 max-sm:pt-8 flex flex-col items-center gap-4">
 
       <div class="flex flex-col gap-2">
         <div
-            class="flex flex-col justify-evenly items-center border-2 border-[#44008C] bg-black/50 px-[2vw] py-[2vh] h-[250px] sm:h-auto
+            class="flex flex-col justify-evenly items-center border-2 border-[#44008C] bg-black/50 px-[2vw] py-[2vh] h-[200px] sm:h-auto
          shadow-[0_8px_20px_#44008C]">
           <h1 class="sm:mb-0 mb-4 uppercase text-stroke text-center text-2xl text-glow">
             Open Grappling Tournament 2025
@@ -151,12 +151,12 @@ const leave = (el: Element, done: () => void) => {
         </div>
 
         <div class="text-center font-medium text-[clamp(1rem,2vw,1.5rem)]">
-          <h2 class="text-[27px] font-medium mt-[50px]">Махачкала, Дворец спорта "Автодор"</h2>
-          <h2 class="text-[27px] font-medium mb-4">24–25 Мая, 2025</h2>
+          <h2 class="text-[27px] font-medium mt-[20px]">Махачкала, Дворец спорта "Автодор"</h2>
+          <h2 class="text-[27px] font-medium mb-3">24–25 Мая, 2025</h2>
           <Button
               @click="openForm"
               variant="primary"
-              class="sm:hidden text-[clamp(.9rem,1.5vw,1.25rem)] uppercase w-fit mb-2
+              class="sm:hidden ripple-btn text-[clamp(.9rem,1.5vw,1.25rem)] uppercase w-fit 
          bg-gradient-to-r from-[#5029de] to-[#4124ab] text-white
          shadow-[0_0_10px_#5029de] hover:shadow-[0_0_20px_#5029de]
          transition duration-300 ease-in-out
@@ -171,59 +171,64 @@ const leave = (el: Element, done: () => void) => {
       <PolicyModal v-model="showPolicy"/>
       <div class="flex flex-col-reverse sm:flex-col gap-4 w-full items-center">
         <nav
-            class="flex flex-col sm:grid gap-2 py-4 uppercase text-center text-[clamp(0.9rem,1.2vw,1.1rem)]  grid-cols-2">
+            class="flex flex-col sm:grid gap-2 uppercase text-center text-[clamp(0.9rem,1.2vw,1.1rem)]  grid-cols-2">
+						<a
+      @click="showFeeModal = true"
+      class="ripple-btn cursor-pointer select-none touch-manipulation
+        bg-black/30 rounded-3xl px-6 py-5 font-normal text-sm
+        ring-1 ring-[#5029de]/50 shadow-[0_0_6px_#5029de]
+        transition-all duration-150 ease-out
+        hover:bg-[#5029de]/80 hover:text-white hover:shadow-[0_0_14px_#5029de]
+        active:bg-[#5029de]/70 active:scale-90 active:shadow-[0_0_18px_#5029de]
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]"
+    >
+      Оплата взноса и страховка
+    </a>
 
-          <a
-              @click="showFeeModal = true"
-              class="cursor-pointer select-none touch-manipulation
-         bg-black/30 rounded-3xl px-6 py-5 font-normal text-sm
-         ring-1 ring-[#5029de]/50 shadow-[0_0_6px_#5029de]
-         transition-all duration-150 ease-out
-         hover:bg-[#5029de]/80 hover:text-white hover:shadow-[0_0_14px_#5029de]
-         active:bg-[#5029de]/70 active:scale-90 active:shadow-[0_0_18px_#5029de]
-         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]"
-          >
-            Оплата взноса и страховка
-          </a>
+    <a
+      @click="showConditionsModal = true"
+      class="ripple-btn cursor-pointer select-none touch-manipulation
+        bg-black/30 rounded-3xl px-6 py-5 font-normal text-sm
+        ring-1 ring-[#5029de]/50 shadow-[0_0_6px_#5029de]
+        transition-all duration-150 ease-out
+        hover:bg-[#5029de]/80 hover:text-white hover:shadow-[0_0_14px_#5029de]
+        active:bg-[#5029de]/70 active:scale-90 active:shadow-[0_0_18px_#5029de]
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]"
+    >
+      Условия допуска
+    </a>
 
+    <a
+      download
+      href="#"
+      class="ripple-btn cursor-pointer select-none touch-manipulation
+        bg-black/30 rounded-3xl px-6 py-5 font-normal text-sm
+        ring-1 ring-[#5029de]/50 shadow-[0_0_6px_#5029de]
+        transition-all duration-150 ease-out
+        hover:bg-[#5029de]/80 hover:text-white hover:shadow-[0_0_14px_#5029de]
+        active:bg-[#5029de]/70 active:scale-90 active:shadow-[0_0_18px_#5029de]
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]"
+    >
+      Скачать регламент
+    </a>
 
-          <a @click="showConditionsModal = true"
-             class="cursor-pointer select-none touch-manipulation
-         bg-black/30 rounded-3xl px-6 py-5 font-normal text-sm
-         ring-1 ring-[#5029de]/50 shadow-[0_0_6px_#5029de]
-         transition-all duration-150 ease-out
-         hover:bg-[#5029de]/80 hover:text-white hover:shadow-[0_0_14px_#5029de]
-         active:bg-[#5029de]/70 active:scale-90 active:shadow-[0_0_18px_#5029de]
-         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]">
-            Условия допуска
-          </a>
-
-          <a download href="#"
-             class="cursor-pointer select-none touch-manipulation
-         bg-black/30 rounded-3xl px-6 py-5 font-normal text-sm
-         ring-1 ring-[#5029de]/50 shadow-[0_0_6px_#5029de]
-         transition-all duration-150 ease-out
-         hover:bg-[#5029de]/80 hover:text-white hover:shadow-[0_0_14px_#5029de]
-         active:bg-[#5029de]/70 active:scale-90 active:shadow-[0_0_18px_#5029de]
-         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]">
-            Скачать регламент
-          </a>
-
-          <a href="#"
-             class="cursor-pointer select-none touch-manipulation
-         bg-black/30 rounded-3xl px-6 py-5 font-normal text-sm
-         ring-1 ring-[#5029de]/50 shadow-[0_0_6px_#5029de]
-         transition-all duration-150 ease-out
-         hover:bg-[#5029de]/80 hover:text-white hover:shadow-[0_0_14px_#5029de]
-         active:bg-[#5029de]/70 active:scale-90 active:shadow-[0_0_18px_#5029de]
-         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]">
-            Список участников
-          </a>
+    <a
+      href="#"
+      class="ripple-btn cursor-pointer select-none touch-manipulation
+        bg-black/30 rounded-3xl px-6 py-5 font-normal text-sm
+        ring-1 ring-[#5029de]/50 shadow-[0_0_6px_#5029de]
+        transition-all duration-150 ease-out
+        hover:bg-[#5029de]/80 hover:text-white hover:shadow-[0_0_14px_#5029de]
+        active:bg-[#5029de]/70 active:scale-90 active:shadow-[0_0_18px_#5029de]
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5029de]"
+    >
+      Список участников
+    </a>
 
 
         </nav>
         <Button @click="openForm" variant="primary"
-                class="max-sm:hidden text-[clamp(.9rem,1.5vw,1.25rem)] uppercase rounded-3xl w-fit">
+                class="max-sm:hidden ripple-btn text-[clamp(.9rem,1.5vw,1.25rem)] uppercase rounded-3xl w-fit">
           зарегистрироваться
         </Button>
 
@@ -278,5 +283,57 @@ const leave = (el: Element, done: () => void) => {
 <style>
 .text-glow {
   filter: drop-shadow(4px 5px 40px #B413FF);
+}
+.ripple-btn {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation; /* для мобильных устройств */
+  transition: all 0.3s ease;
+}
+
+/* Для анимации эффекта при нажатии */
+.ripple-btn:active::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  animation: ripple-effect 0.6s linear;
+}
+
+.ripple-btn:active {
+  transform: scale(0.98); /* Эффект уменьшения при касании */
+}
+
+/* Анимация ripple-эффекта */
+@keyframes ripple-effect {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Свечение при фокусе и при касании */
+.ripple-btn:focus-visible,
+.ripple-btn:hover {
+  box-shadow: 0 0 10px rgba(80, 41, 222, 0.8);
+  text-shadow: 0 0 5px rgba(80, 41, 222, 0.6);
+}
+
+/* Для мобильных устройств */
+@media (max-width: 768px) {
+  .ripple-btn {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+  .ripple-btn:active {
+    transform: scale(0.95);
+  }
 }
 </style>

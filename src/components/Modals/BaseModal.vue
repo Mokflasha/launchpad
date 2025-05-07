@@ -1,69 +1,111 @@
 <script setup lang="ts">
-import {defineEmits, defineProps, onBeforeUnmount, onMounted, watch} from "vue";
+import { defineEmits, defineProps, onBeforeUnmount, onMounted, watch } from 'vue'
 
 const props = defineProps<{
-  modelValue: boolean;
-}>();
+  modelValue: boolean
+}>()
 
 const emit = defineEmits<{
-  (e: "update:modelValue", value: boolean): void;
-}>();
+  (e: 'update:modelValue', value: boolean): void
+}>()
 
-const close = () => emit("update:modelValue", false);
-const onBackdropClick = () => close();
+const close = () => emit('update:modelValue', false)
+const onBackdropClick = () => close()
 
-// Scroll Lock
+// Scroll lock
 const lockScroll = () => {
-  document.body.style.overflow = "hidden";
-};
+  document.body.style.overflow = 'hidden'
+}
 const unlockScroll = () => {
-  document.body.style.overflow = "";
-};
+  document.body.style.overflow = ''
+}
 
 watch(() => props.modelValue, (val) => {
-  val ? lockScroll() : unlockScroll();
-});
+  val ? lockScroll() : unlockScroll()
+})
 onMounted(() => {
-  if (props.modelValue) lockScroll();
-});
-onBeforeUnmount(() => unlockScroll());
+  if (props.modelValue) lockScroll()
+})
+onBeforeUnmount(() => unlockScroll())
 </script>
 
 <template>
-  <div v-if="modelValue" class="fixed inset-0 z-[100] flex items-center justify-center px-2">
-    <!-- Фон с fade-появлением -->
-    <transition name="fade-backdrop">
+  <transition name="fade" appear>
+    <div
+      v-show="modelValue"
+      class="fixed inset-0 z-[100] flex items-center justify-center px-2 pointer-events-none"
+    >
+      <!-- Фон -->
       <div
-          v-show="modelValue"
-          class="fixed inset-0 bg-black/60"
-          @click="onBackdropClick"
+        class="fixed inset-0 bg-black/60 pointer-events-auto"
+        @click="onBackdropClick"
       ></div>
-    </transition>
 
-    <!-- Модалка с плавным появлением сверху -->
-    <transition name="slide-down" appear>
-      <div
-          v-if="modelValue"
-          class="relative bg-white rounded-xl shadow-xl max-w-lg w-full max-h-[90vh] z-50 overflow-hidden"
-      >
-        <button
-            @click="close"
-            class="absolute top-2 right-3 text-3xl text-black cursor-pointer"
+      <!-- Модалка -->
+      <transition name="slide-down" appear>
+        <div
+          v-show="modelValue"
+          class="relative bg-white rounded-xl shadow-xl max-w-lg w-full max-h-[99vh] z-50 flex flex-col pointer-events-auto"
         >
-          ×
-        </button>
+				<div class="border-b flex justify-end">
+					<button
+					@click="close"
+					class=" p-3 text-2xl text-[#bfbfbf] cursor-pointer"
+					>
+						×
+					</button>
+				</div>
 
-        <div class="overflow-y-auto  p-8 scrollbar-hide">
 
-          <slot/>
+          <div class="overflow-y-auto p-8 pt-[2rem] max-h-[99vh] scrollbar-hide">
+            <slot />
+          </div>
         </div>
-      </div>
-    </transition>
-  </div>
+      </transition>
+    </div>
+  </transition>
 </template>
 
 <style scoped>
-/* Анимация заднего фона */
+/* Фон */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
+
+/* Модалка */
+.slide-down-enter-active,
+.slide-down-leave-active {
+  transition: all 0.5s ease;
+}
+.slide-down-enter-from {
+  transform: translateY(-100px);
+
+}
+.slide-down-enter-to {
+  transform: translateY(0);
+
+}
+.slide-down-leave-from {
+  transform: translateY(0);
+
+}
+.slide-down-leave-to {
+  transform: translateY(-100px);
+
+}
+</style>
+
+
+/* 
 .fade-backdrop-enter-active,
 .fade-backdrop-leave-active {
   transition: opacity 0.25s ease;
@@ -77,11 +119,25 @@ onBeforeUnmount(() => unlockScroll());
 .fade-backdrop-enter-to,
 .fade-backdrop-leave-from {
   opacity: 1;
+} 
+.fade-backdrop-enter-active,
+.fade-backdrop-leave-active {
+  transition: all 4s ease-in-out;
 }
 
-/* Анимация модального окна */
+.fade-backdrop-enter-from,
+.fade-backdrop-leave-to {
+  opacity: 0;
+}
+
+.fade-backdrop-enter-to,
+.fade-backdrop-leave-from {
+  opacity: 1;
+}
+
+
 .slide-down-enter-active {
-  transition: all 0.4s ease;
+  transition: all 4s ease;
 }
 
 .slide-down-enter-from {
@@ -92,5 +148,4 @@ onBeforeUnmount(() => unlockScroll());
 .slide-down-enter-to {
   transform: translateY(0);
   opacity: 1;
-}
-</style>
+} */

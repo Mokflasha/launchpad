@@ -6,6 +6,7 @@ interface TimeBlock {
   label: string;
 }
 
+
 const props = defineProps<{
   times: TimeBlock[];
   title?: string;
